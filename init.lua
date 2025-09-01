@@ -177,6 +177,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 vim.keymap.set('n', '<leader>n', '<cmd>:Neotree<cr>', { desc = 'Open [N]eotree' })
+ 
+  -- add prettier formatting to format submenu
+  vim.keymap.set('n', '<leader>fp', '<cmd>silent %!prettier --stdin-filepath %<cr>', { desc = 'Format with [P]rettier' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -359,6 +362,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>f', group = '[F]ormat' },
       },
     },
   },
@@ -767,7 +771,7 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>ff',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
@@ -801,7 +805,6 @@ require('lazy').setup({
       },
     },
   },
-
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
